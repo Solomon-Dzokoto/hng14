@@ -19,7 +19,6 @@ A production-quality Expo React Native app combining three connected utility mod
 - **Tip Calculator** — quick tip math with preset percentages
 - **Fuel Estimator** — estimate trip fuel costs
 - **Percentage Math** — calculate discounts and differences
-
 ## Architecture
 
 ```
@@ -49,7 +48,6 @@ tests/            # Unit tests
 - **Zustand** for client state
 - **TanStack Query** for remote data
 - **expo-sqlite** for local persistence
-
 ## Getting Started
 
 ```bash

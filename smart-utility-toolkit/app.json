@@ -15,7 +15,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.maahmood.smart-utility-toolkit"
+      "bundleIdentifier": "com.maahmood.smart-utility-toolkit",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -37,6 +40,13 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "33d23e18-5322-4116-a2d3-7b16affbcce9"
+      }
+    },
+    "owner": "maahmood"
   }
 }
