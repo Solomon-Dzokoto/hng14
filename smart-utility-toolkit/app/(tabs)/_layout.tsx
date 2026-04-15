@@ -30,6 +30,15 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
+        name="tasks"
+        options={{
+          title: 'Tasks',
+          tabBarIcon: ({ color, size }) => (
+            <Ionicons name="checkbox-outline" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="notes"
         options={{
           title: 'Notes',
@@ -50,3 +59,4 @@ export default function TabsLayout() {
     </Tabs>
   );
 }
+

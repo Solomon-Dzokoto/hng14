@@ -18,5 +18,14 @@ export const initDb = async () => {
       createdAt INTEGER NOT NULL,
       updatedAt INTEGER NOT NULL
     );
+    CREATE TABLE IF NOT EXISTS tasks (
+      id TEXT PRIMARY KEY NOT NULL,
+      title TEXT NOT NULL,
+      description TEXT DEFAULT '',
+      priority TEXT DEFAULT '1',
+      completed INTEGER DEFAULT 0,
+      createdAt INTEGER NOT NULL,
+      updatedAt INTEGER NOT NULL
+    );
   `);
 };

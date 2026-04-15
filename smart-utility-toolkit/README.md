@@ -1,63 +1,126 @@
 # Smart Utility Toolkit
 
-A production-quality Expo React Native app combining three connected utility modules in one clean, scalable product.
+A mobile utility app built with **React Native + Expo**, featuring a unit converter, task/checklist manager, and notes — all with offline persistence via SQLite.
+
+---
 
 ## Features
 
 ### 🔄 Unit Converter
-- Length, weight, temperature, and live currency conversions
-- Real-time currency rates via TanStack Query with offline caching
-- Swap units interaction and conversion history (Zustand)
+- Convert **Length**, **Weight**, **Temperature**, and **Currency** units
+- Live currency rates via open API
+- Conversion history persisted via Zustand
+
+### ✅ Task / Checklist Manager *(Stage 1 — new)*
+- Create, edit, and delete tasks
+- Mark tasks as completed with a single tap
+- Set task **priority** (Low / Medium / High)
+- Filter tasks: **All**, **Active**, or **Done**
+- Search tasks by title or description
+- **Clear completed** tasks in one go
+- Fully **offline** — persisted locally with **SQLite**
 
 ### 📝 Notes
-- Create, edit, delete, and search notes
-- Persisted locally with expo-sqlite (WAL mode)
-- Category tags, empty states, and clean editor
+- Create and edit rich-text notes
+- Categorise and search notes
+- Offline-first with SQLite
 
-### 🛠 Daily Helpers
-- **Bill Splitter** — divide expenses evenly
-- **Tip Calculator** — quick tip math with preset percentages
-- **Fuel Estimator** — estimate trip fuel costs
-- **Percentage Math** — calculate discounts and differences
-## Architecture
+### 🛠 Helpers
+- Quick-access utility tools
 
-```
-app/              # Expo Router file-based routing
-  (tabs)/         # Bottom tab navigator
-  notes/          # Note editor stack screens
-  helpers/        # Helper tool stack screens
-components/ui/    # Shared design system components
-features/         # Feature-first domain logic
-  converter/      # Conversion services, store
-  notes/          # SQLite repository hooks
-  helpers/        # Pure calculation formulas
-lib/              # Infrastructure (sqlite, design tokens)
-providers/        # React context providers
-tests/            # Unit tests
-```
-
-**Key patterns:**
-- Feature-first architecture — domain logic isolated from UI
-- Pure functions for all calculations — testable, no React dependencies
-- Thin screens — business logic lives in services/hooks, not components
-- Design tokens — single source of truth for colors, spacing, typography
+---
 
 ## Tech Stack
-- **Expo SDK 54** + Expo Router
-- **TypeScript** (strict mode)
-- **Zustand** for client state
-- **TanStack Query** for remote data
-- **expo-sqlite** for local persistence
-## Getting Started
+
+| Layer | Technology |
+|-------|------------|
+| Framework | React Native + Expo SDK 52 |
+| Navigation | Expo Router (file-based) |
+| Local Storage | expo-sqlite (SQLite) |
+| Global State | Zustand |
+| Styling | StyleSheet (Design Tokens) |
+| Build | EAS Build |
+
+---
+
+## Project Structure
+
+```
+app/
+  (tabs)/
+    converter.tsx   # Unit converter screen
+    tasks.tsx       # Task manager screen  ← NEW
+    notes.tsx       # Notes list screen
+    helpers.tsx     # Utility helpers screen
+  notes/            # Note detail routes
+
+features/
+  converter/        # Converter logic, store, services
+  tasks/            # Task feature
+    hooks/
+      useTasks.ts   # SQLite CRUD hook
+    components/
+      TaskCard.tsx  # Task row with checkbox, badges, actions
+      TaskForm.tsx  # Create / Edit modal
+  notes/            # Notes hooks
+
+lib/
+  sqlite/index.ts   # DB init (notes + tasks tables)
+  design/tokens.ts  # Design system tokens
+
+components/
+  ui/               # AppText, Button, Card, Input, EmptyState, ScreenWrapper
+```
+
+---
+
+## Running Locally
+
+### Prerequisites
+- Node 18+
+- Expo CLI (`npm i -g expo-cli`)
+- Xcode (iOS) or Android Studio (Android)
 
 ```bash
+# Install dependencies
 npm install
+
+# Start Metro bundler
 npx expo start
+
+# Run on iOS simulator
+npx expo run:ios
+
+# Run on Android emulator / device
+npx expo run:android
 ```
 
-Press `i` for iOS simulator or `a` for Android emulator.
+---
 
-For native builds:
+## Build (Production APK / IPA)
+
 ```bash
-npx expo run:ios --device
+# Android APK (local)
+cd android && ./gradlew assembleRelease
+
+# iOS simulator build (local)
+npx expo run:ios --configuration Release
+
+# Cloud builds via EAS
+eas build -p android --profile production
+eas build -p ios    --profile production
 ```
+
+APK output: `android/app/build/outputs/apk/release/app-release.apk`
+
+---
+
+## Offline Support
+
+All task and note data is stored locally using **expo-sqlite**. The app works fully offline — no internet connection required for the task manager or notes features. Currency conversion rates are cached and fall back gracefully when offline.
+
+---
+
+## License
+
+MIT
